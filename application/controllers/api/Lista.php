@@ -1,6 +1,7 @@
 <?php
 
-   
+
+use Restserver\Libraries\REST_Controller;
 
 require APPPATH . 'libraries/REST_Controller.php';
 
@@ -15,8 +16,6 @@ class Lista extends REST_Controller {
      * Get All Data from this method.
 
      *
-
-     * @return Response
 
     */
 
@@ -36,15 +35,13 @@ class Lista extends REST_Controller {
 
      *
 
-     * @return Response
-
     */
 
 	public function index_get()
 
 	{
 
-        $lista_de_salas = $this->db->get('salas')->result()
+        $lista_de_salas = $this->db->get('salas')->result();
 
         $this->response($lista_de_salas, REST_Controller::HTTP_OK);
 
@@ -58,8 +55,6 @@ class Lista extends REST_Controller {
 
      *
 
-     * @return Response
-
     */
 
     /**
@@ -67,8 +62,6 @@ class Lista extends REST_Controller {
      * Get All Data from this method.
 
      *
-
-     * @return Response
 
     */
 
@@ -78,7 +71,7 @@ class Lista extends REST_Controller {
 
         $put_data = $this->put();
 
-        $this->db->where('id', $id)
+        $this->db->where('id', $id);
         $this->db->update('salas', $put_data);
 
      
@@ -95,22 +88,20 @@ class Lista extends REST_Controller {
 
      *
 
-     * @return Response
-
     */
 
     public function index_delete($id)
 
     {   
         $data = array(
-            'ativa':false
-        )
-        $this->db->where('id', $id)
+            'ativa'=>false
+        );
+        $this->db->where('id', $id);
         $this->db->update('salas', $data);
 
      
 
-        $this->response(['Sala removida.'], REST_Controller::HTTP_OK);
+        $this->response(array('Sala removida.'), REST_Controller::HTTP_OK);
 
     }
 
