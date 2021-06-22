@@ -19,12 +19,18 @@ class Lista extends REST_Controller {
 
     */
 
-    public function __construct() {
+    public function __construct($config = 'rest')
+    {
+        parent::__construct($config);
 
-       parent::__construct();
-
-       $this->load->database();
-
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method == "OPTIONS") {
+            die();
+        }
+        $this->load->database();
     }
 
        
@@ -71,7 +77,7 @@ class Lista extends REST_Controller {
 
         $put_data = $this->put();
 
-        $this->db->where('id', $id);
+        $this->db->where('sala_id', $id);
         $this->db->update('salas', $put_data);
 
      
@@ -96,10 +102,8 @@ class Lista extends REST_Controller {
         $data = array(
             'ativa'=>false
         );
-        $this->db->where('id', $id);
+        $this->db->where('sala_id', $id);
         $this->db->update('salas', $data);
-
-     
 
         $this->response(array('Sala removida.'), REST_Controller::HTTP_OK);
 
