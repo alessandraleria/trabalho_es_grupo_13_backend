@@ -47,14 +47,7 @@ class Cadastro extends REST_Controller {
 
 	{
 
-      $data = array(
-         'nome' => $this->input->post('nome'),
-         'categoria' => $this->input->post('categoria'),
-         'assentos' => $this->input->post('assentos'),
-         'ativa' => 1
-         );
-         //$this->db->set($data);
-		   $this->db->insert('salas', $data);
+		   $this->db->insert('salas', $this->post());
 
 
 
